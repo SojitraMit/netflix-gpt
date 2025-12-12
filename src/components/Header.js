@@ -5,13 +5,17 @@ import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
-import { LOGO, USER_AVATAR } from "../utils/constants";
+import { LOGO, SUPPORTED_LANGUAGES, USER_AVATAR } from "../utils/constants";
+import { toggleGptSearchView } from "../utils/gptSlice";
+import { changeLanguage } from "../utils/configSlice";
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const user = useSelector((store) => store.user);
+  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
+
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -51,15 +55,41 @@ const Header = () => {
     return () => unsubscribe();
   }, []);
 
+  const handleGptSearchClick = () => {
+    //toggle
+    dispatch(toggleGptSearchView());
+  };
+
+  const handlChangeLanguage = (e) => {
+    dispatch(changeLanguage(e.target.value));
+  };
+
   return (
     <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex  justify-between">
       <img className="w-48 " src={LOGO} />
       {user && (
         <div className="flex p-4">
+          {showGptSearch && (
+            <select
+              className="h-8 mt-2 bg-black text-white"
+              onChange={handlChangeLanguage}>
+              {SUPPORTED_LANGUAGES.map((lang) => (
+                <option key={lang.identifier} value={lang.identifier}>
+                  {lang.name}
+                </option>
+              ))}
+            </select>
+          )}
+
+          <button
+            className="text-white border bg-purple-800  mx-8 h-8 mt-2 rounded-lg px-2 bg-whit"
+            onClick={handleGptSearchClick}>
+            {showGptSearch ? "Homepage" : "GPT Search"}
+          </button>
           <img className="w-12  h-12 mr-2" src={USER_AVATAR} />
           <button
             onClick={handleSignOut}
-            className="bg-white rounded-xl h-8 p-1 mt-2">
+            className="bg-black rounded-xl h-8 p-1 mt-2 bg-opacity-0 border text-white font-bold">
             Sign out
           </button>
         </div>

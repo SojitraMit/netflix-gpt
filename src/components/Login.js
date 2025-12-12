@@ -10,6 +10,7 @@ import {
 import { auth } from "../utils/firebase";
 import { addUser } from "../utils/userSlice";
 import { useDispatch } from "react-redux";
+import { BG_URL } from "../utils/constants";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -106,7 +107,7 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute ">
-        <img src="https://assets.nflxext.com/ffe/siteui/vlv3/bebd95d0-65f9-41a9-9d12-4794db63653e/web/IN-en-20250922-TRIFECTA-perspective_5e75cfb4-3797-4f17-866b-181ff91a51dd_large.jpg" />
+        <img src={BG_URL} />
       </div>
       <div className="flex    justify-center text-white ">
         <form
