@@ -1,0 +1,13 @@
+[33m38e93c5[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m HEAD@{0}: reset: moving to origin/main
+[33mae4038f[m HEAD@{1}: commit: Clean commit without secrets
+[33m8dc4f73[m HEAD@{2}: reset: moving to HEAD~1
+[33m6743c73[m HEAD@{3}: commit: Remove .env from git tracking
+[33m8dc4f73[m HEAD@{4}: commit: last
+[33m73089a0[m HEAD@{5}: commit: movie suggetion
+[33m38e93c5[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m HEAD@{6}: commit: multi language
+[33m3df615b[m HEAD@{7}: commit: secondary container
+[33m19f988c[m HEAD@{8}: commit: home page 1
+[33m063bc06[m HEAD@{9}: commit: login
+[33m0df3680[m HEAD@{10}: commit: login page
+[33m42961c6[m HEAD@{11}: Branch: renamed refs/heads/master to refs/heads/main
+[33m42961c6[m HEAD@{13}: commit (initial): Initialize project using Create React App
