@@ -106,34 +106,34 @@ const Login = () => {
   return (
     <div>
       <Header />
-      <div className="absolute ">
-        <img src={BG_URL} />
+      <div className="absolute  ">
+        <img className="h-screen object-cover md:h-auto" src={BG_URL} />
       </div>
       <div className="flex    justify-center text-white ">
         <form
           onSubmit={(e) => e.preventDefault()}
-          className="absolute mt-32  bg-black bg-opacity-80  p-12 w-[430px] text-white rounded-lg">
-          <h1 className="font-bold text-3xl mb-10">
+          className="absolute mt-[40%] md:mt-32  bg-black bg-opacity-80 p-7  md:p-12 w-[90%] md:w-[430px] text-white rounded-lg">
+          <h1 className="font-bold text-2xl md:text-3xl mb-5 md:mb-10">
             {isSignIn ? "Sign in" : "Sign up"}
           </h1>
 
           {!isSignIn && (
             <input
               ref={name}
-              className="p-4  my-4 w-full bg-gray-700 rounded-lg"
+              className="md:p-4 p-2 my-2  md:my-4 w-full bg-gray-700 rounded-lg"
               type="text"
               placeholder="Full name"
             />
           )}
           <input
             ref={email}
-            className="p-4  my-4 w-full bg-gray-700 rounded-lg"
+            className="p-3 md:p-4  my-2 md:my-4 w-full bg-gray-700 rounded-lg"
             type="text"
             placeholder=" Email address"
           />
           <input
             ref={password}
-            className="p-4 my-4 w-full bg-gray-700 rounded-lg"
+            className="p-3 md:p-4 my-2 md:my-4 w-full bg-gray-700 rounded-lg"
             type="password"
             placeholder=" Password"
           />
