@@ -53,21 +53,29 @@ const GptSearchBar = () => {
   };
 
   return (
-    <div className=" pb-5 flex justify-center pt-[45%] md:pt-32">
-      <form
-        className="bg-black p-1 w-full md:w-1/2 rounded-3xl grid grid-cols-12"
-        onSubmit={(e) => e.preventDefault()}>
-        <input
-          ref={searchText}
-          className="m-2 px-4 py-3 rounded-2xl col-span-9"
-          placeholder={lang[langKey]?.gptSearchPlacholder}
-        />
-        <button
-          className="m-2 px-2 py-3 rounded-2xl text-white bg-red-700 col-span-3"
-          onClick={handleGptSearchClick}>
-          {lang[langKey]?.search}
-        </button>
-      </form>
+    <div className="pt-[40%] md:pt-24">
+      <p className="text-white bg-black bg-opacity-35 mb-2    md:w-[1000px]  md:mb-5 md:m-auto md:font-bol">
+        <b className="bg-black bg-opacity-80">🔍Note</b>:- you can enter a movie
+        genre, mood, or example like “romantic movies”, “sci-fi movies like
+        Interstellar”, or “feel-good movies”. The system will suggest movie
+        recommendations for you to explore.
+      </p>
+      <div className=" pb-5 flex justify-center  ">
+        <form
+          className="bg-black p-1 w-full md:w-1/2 rounded-3xl grid grid-cols-12"
+          onSubmit={(e) => e.preventDefault()}>
+          <input
+            ref={searchText}
+            className="m-2 px-4 py-3 rounded-2xl col-span-9"
+            placeholder={lang[langKey]?.gptSearchPlacholder}
+          />
+          <button
+            className="m-2 px-2 py-3 rounded-2xl text-white bg-red-700 col-span-3"
+            onClick={handleGptSearchClick}>
+            {lang[langKey]?.search}
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
