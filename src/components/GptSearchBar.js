@@ -3,11 +3,12 @@ import lang from "../utils/languageConstants";
 import { useDispatch, useSelector } from "react-redux";
 import client from "../utils/groqClient";
 import { API_OPTIONS } from "../utils/constants";
-import { addGptMovieRresult } from "../utils/gptSlice";
+import { addGptMovieRresult, setLoading } from "../utils/gptSlice";
 
 const GptSearchBar = () => {
   const searchText = useRef(null);
   const langKey = useSelector((store) => store.config.lang);
+  const isLoading = useSelector((store) => store.gpt.isLoading);
   const dispatch = useDispatch();
 
   const searchMoviesTMDB = async (movie) => {
@@ -15,7 +16,7 @@ const GptSearchBar = () => {
       "https://api.themoviedb.org/3/search/movie?query=" +
         movie +
         "&include_adult=false&language=en-US&page=1",
-      API_OPTIONS
+      API_OPTIONS,
     );
 
     const json = await data.json();
@@ -23,6 +24,7 @@ const GptSearchBar = () => {
   };
 
   const handleGptSearchClick = async () => {
+    dispatch(setLoading());
     const query = searchText.current.value;
     console.log("User Query:", query);
 
@@ -48,7 +50,7 @@ const GptSearchBar = () => {
     const promiseArray = gptMovies.map((movie) => searchMoviesTMDB(movie));
     const tmdbResult = await Promise.all(promiseArray);
     dispatch(
-      addGptMovieRresult({ movieNames: gptMovies, movieResults: tmdbResult })
+      addGptMovieRresult({ movieNames: gptMovies, movieResults: tmdbResult }),
     );
   };
 
@@ -72,7 +74,15 @@ const GptSearchBar = () => {
           <button
             className="m-2 px-2 py-3 rounded-2xl text-white bg-red-700 col-span-3"
             onClick={handleGptSearchClick}>
-            {lang[langKey]?.search}
+            {isLoading ? (
+              <div className="flex justify-center items-center  gap-2">
+                <div className="w-2 h-2 bg-white rounded-full animate-bounce"></div>
+                <div className="w-2 h-2 bg-white rounded-full animate-bounce [animation-delay:0.2s]"></div>
+                <div className="w-2 h-2 bg-white rounded-full animate-bounce [animation-delay:0.4s]"></div>
+              </div>
+            ) : (
+              lang[langKey]?.search
+            )}
           </button>
         </form>
       </div>
