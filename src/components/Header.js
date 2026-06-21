@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
@@ -38,7 +37,7 @@ const Header = () => {
             email: email,
             displayName: displayName,
             photoURL: photoURL,
-          })
+          }),
         );
         navigate("/browse");
 
@@ -53,7 +52,7 @@ const Header = () => {
 
     //unsubscribe when component unmounts
     return () => unsubscribe();
-  }, []);
+  }, [dispatch, navigate]);
 
   const handleGptSearchClick = () => {
     //toggle
@@ -66,7 +65,11 @@ const Header = () => {
 
   return (
     <div className="absolute w-screen px-4 md:px-8 py-2 md:py-2 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between  ">
-      <img className="w-44 h-16 md:h-auto m-auto md:m-0" src={LOGO} />
+      <img
+        className="w-44 h-16 md:h-auto m-auto md:m-0"
+        src={LOGO}
+        alt="Netflix GPT logo"
+      />
       {user && (
         <div className="flex justify-between  pt-2 md:p-4">
           {showGptSearch && (
@@ -90,6 +93,7 @@ const Header = () => {
             <img
               className=" md:w-12  md:ml-0  md:h-12 w-10 h-10 mt-1 md:mt-0 mr-2"
               src={USER_AVATAR}
+              alt="User avatar"
             />
             <button
               onClick={handleSignOut}

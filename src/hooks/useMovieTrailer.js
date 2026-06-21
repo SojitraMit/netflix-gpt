@@ -7,23 +7,27 @@ const useMovieTrailer = (moviesId) => {
   const dispatch = useDispatch();
   const movieVideos = useSelector((store) => store.movies.trailerVideo);
 
-  const getMoviesVideos = async () => {
-    const data = await fetch(
-      "https://api.themoviedb.org/3/movie/" +
-        moviesId +
-        "/videos?language=en-US",
-      API_OPTIONS
-    );
-    const json = await data.json();
-
-    const filterData = json.results.filter((video) => video.type === "Trailer");
-    const trailer = filterData.length ? filterData[0] : json.results[0];
-    dispatch(addTrailerVideo(trailer));
-  };
-
   useEffect(() => {
-    !movieVideos && getMoviesVideos();
-  }, []);
+    if (!movieVideos) {
+      const getMoviesVideos = async () => {
+        const data = await fetch(
+          "https://api.themoviedb.org/3/movie/" +
+            moviesId +
+            "/videos?language=en-US",
+          API_OPTIONS,
+        );
+        const json = await data.json();
+
+        const filterData = json.results.filter(
+          (video) => video.type === "Trailer",
+        );
+        const trailer = filterData.length ? filterData[0] : json.results[0];
+        dispatch(addTrailerVideo(trailer));
+      };
+
+      getMoviesVideos();
+    }
+  }, [dispatch, movieVideos, moviesId]);
 };
 
 export default useMovieTrailer;
